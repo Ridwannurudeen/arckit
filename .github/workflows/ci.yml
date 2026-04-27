@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ts:
+    name: TypeScript build & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm typecheck
+
+      - run: pnpm build
+
+      - run: pnpm test
+
+      - run: pnpm lint
+
+  python:
+    name: Python build & test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install dependencies
+        working-directory: packages/sdk-py
+        run: uv pip install --system -e ".[dev]"
+
+      - name: Lint with ruff
+        working-directory: packages/sdk-py
+        run: ruff check src tests
+
+      - name: Run tests
+        working-directory: packages/sdk-py
+        run: pytest --cov=arckit --cov-report=term
+
+  solidity:
+    name: Foundry build & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Build hooks
+        working-directory: packages/hooks
+        run: forge build --sizes
+
+      - name: Test hooks
+        working-directory: packages/hooks
+        run: forge test -vvv
+
+      - name: Format check
+        working-directory: packages/hooks
+        run: forge fmt --check

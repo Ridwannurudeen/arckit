@@ -1,0 +1,65 @@
+{
+  "name": "@arckit/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for Arc agent commerce — ERC-8183, ERC-8004, USDC payments",
+  "license": "MIT",
+  "author": "Ridwan Nurudeen <ggudman@gmail.com>",
+  "homepage": "https://github.com/Ridwannurudeen/arckit/tree/main/packages/sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ridwannurudeen/arckit.git",
+    "directory": "packages/sdk"
+  },
+  "keywords": [
+    "arc",
+    "arc-network",
+    "erc-8183",
+    "erc-8004",
+    "agentic-commerce",
+    "viem",
+    "circle",
+    "usdc"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./abi": {
+      "types": "./dist/abi/index.d.ts",
+      "import": "./dist/abi/index.js",
+      "require": "./dist/abi/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "peerDependencies": {
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "viem": "^2.21.55",
+    "vitest": "^2.1.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

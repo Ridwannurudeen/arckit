@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arckit"
+version = "0.1.0"
+description = "Python SDK for Arc agent commerce — ERC-8183, ERC-8004, USDC payments"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Ridwan Nurudeen", email = "ggudman@gmail.com" }]
+requires-python = ">=3.10"
+keywords = ["arc", "arc-network", "erc-8183", "erc-8004", "agentic-commerce", "circle", "usdc", "web3"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "web3>=6.15.0,<8.0.0",
+    "eth-account>=0.11.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/Ridwannurudeen/arckit"
+Repository = "https://github.com/Ridwannurudeen/arckit"
+Issues = "https://github.com/Ridwannurudeen/arckit/issues"
+Documentation = "https://github.com/Ridwannurudeen/arckit/tree/main/packages/sdk-py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arckit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]

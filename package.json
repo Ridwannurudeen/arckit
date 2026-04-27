@@ -1,0 +1,44 @@
+{
+  "name": "arckit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The canonical SDK, hook templates, and scaffold for building agent commerce on Arc",
+  "license": "MIT",
+  "author": "Ridwan Nurudeen <ggudman@gmail.com>",
+  "homepage": "https://github.com/Ridwannurudeen/arckit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ridwannurudeen/arckit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ridwannurudeen/arckit/issues"
+  },
+  "keywords": [
+    "arc",
+    "arc-network",
+    "erc-8183",
+    "erc-8004",
+    "agent-commerce",
+    "agentic-commerce",
+    "sdk",
+    "circle",
+    "usdc"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  }
+}
