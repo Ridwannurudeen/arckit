@@ -7,7 +7,13 @@ from web3 import Web3
 from web3.middleware import ExtraDataToPOAMiddleware
 
 from arckit._tx import TxContext
-from arckit.clients import CommerceClient, IdentityClient, ReputationClient, UsdcClient, ValidationClient
+from arckit.clients import (
+    CommerceClient,
+    IdentityClient,
+    ReputationClient,
+    UsdcClient,
+    ValidationClient,
+)
 from arckit.constants import get_network_config
 
 
