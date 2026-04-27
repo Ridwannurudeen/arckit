@@ -1,0 +1,162 @@
+export const agenticCommerceAbi = [
+  {
+    type: 'function',
+    name: 'createJob',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'provider', type: 'address' },
+      { name: 'evaluator', type: 'address' },
+      { name: 'expiredAt', type: 'uint256' },
+      { name: 'description', type: 'string' },
+      { name: 'hook', type: 'address' },
+    ],
+    outputs: [{ name: '', type: 'uint256' }],
+  },
+  {
+    type: 'function',
+    name: 'setBudget',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'jobId', type: 'uint256' },
+      { name: 'amount', type: 'uint256' },
+      { name: 'optParams', type: 'bytes' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'fund',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'jobId', type: 'uint256' },
+      { name: 'optParams', type: 'bytes' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'submit',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'jobId', type: 'uint256' },
+      { name: 'deliverable', type: 'bytes32' },
+      { name: 'optParams', type: 'bytes' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'complete',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'jobId', type: 'uint256' },
+      { name: 'reason', type: 'bytes32' },
+      { name: 'optParams', type: 'bytes' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'reject',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'jobId', type: 'uint256' },
+      { name: 'reason', type: 'bytes32' },
+      { name: 'optParams', type: 'bytes' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'claimRefund',
+    stateMutability: 'nonpayable',
+    inputs: [{ name: 'jobId', type: 'uint256' }],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'getJob',
+    stateMutability: 'view',
+    inputs: [{ name: 'jobId', type: 'uint256' }],
+    outputs: [
+      {
+        name: '',
+        type: 'tuple',
+        components: [
+          { name: 'id', type: 'uint256' },
+          { name: 'client', type: 'address' },
+          { name: 'provider', type: 'address' },
+          { name: 'evaluator', type: 'address' },
+          { name: 'description', type: 'string' },
+          { name: 'budget', type: 'uint256' },
+          { name: 'expiredAt', type: 'uint256' },
+          { name: 'status', type: 'uint8' },
+          { name: 'hook', type: 'address' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'function',
+    name: 'jobCounter',
+    stateMutability: 'view',
+    inputs: [],
+    outputs: [{ name: '', type: 'uint256' }],
+  },
+  {
+    type: 'function',
+    name: 'paymentToken',
+    stateMutability: 'view',
+    inputs: [],
+    outputs: [{ name: '', type: 'address' }],
+  },
+  {
+    type: 'event',
+    name: 'JobCreated',
+    inputs: [
+      { name: 'jobId', type: 'uint256', indexed: true },
+      { name: 'client', type: 'address', indexed: true },
+      { name: 'provider', type: 'address', indexed: true },
+      { name: 'evaluator', type: 'address', indexed: false },
+      { name: 'expiredAt', type: 'uint256', indexed: false },
+      { name: 'hook', type: 'address', indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: 'event',
+    name: 'JobFunded',
+    inputs: [
+      { name: 'jobId', type: 'uint256', indexed: true },
+      { name: 'amount', type: 'uint256', indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: 'event',
+    name: 'JobSubmitted',
+    inputs: [
+      { name: 'jobId', type: 'uint256', indexed: true },
+      { name: 'deliverable', type: 'bytes32', indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: 'event',
+    name: 'JobCompleted',
+    inputs: [
+      { name: 'jobId', type: 'uint256', indexed: true },
+      { name: 'reason', type: 'bytes32', indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: 'event',
+    name: 'JobRejected',
+    inputs: [
+      { name: 'jobId', type: 'uint256', indexed: true },
+      { name: 'reason', type: 'bytes32', indexed: false },
+    ],
+    anonymous: false,
+  },
+] as const;
