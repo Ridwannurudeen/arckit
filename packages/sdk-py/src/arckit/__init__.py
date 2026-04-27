@@ -15,7 +15,9 @@ from arckit.errors import (
     InsufficientBalanceError,
     JobNotFoundError,
     AgentNotFoundError,
+    WalletRequiredError,
 )
+from arckit.types import ValidationResponse
 
 __all__ = [
     "ArcKit",
@@ -26,11 +28,13 @@ __all__ = [
     "Feedback",
     "FeedbackCategory",
     "ValidationStatus",
+    "ValidationResponse",
     "ArcKitError",
     "TransactionRevertedError",
     "TransactionTimeoutError",
     "InsufficientBalanceError",
     "JobNotFoundError",
     "AgentNotFoundError",
+    "WalletRequiredError",
 ]
 __version__ = "0.1.0"
