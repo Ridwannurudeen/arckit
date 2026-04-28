@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "arckit-sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python SDK for Arc agent commerce — ERC-8183, ERC-8004, USDC payments"
 readme = "README.md"
 license = { text = "MIT" }

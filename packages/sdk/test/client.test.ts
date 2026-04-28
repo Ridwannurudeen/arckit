@@ -50,6 +50,7 @@ describe('ArcKit construction', () => {
   it('uses the configured chain', () => {
     const arc = new ArcKit();
     expect(arc.publicClient.chain?.id).toBe(arcTestnet.id);
+    expect(arc.publicClient.chain?.id).toBe(5042002);
   });
 });
 

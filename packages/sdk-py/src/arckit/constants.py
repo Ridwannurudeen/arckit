@@ -1,6 +1,6 @@
 """Network and contract address constants for Arc."""
 
-ARC_TESTNET_CHAIN_ID = 99999
+ARC_TESTNET_CHAIN_ID = 5042002
 ARC_TESTNET_RPC = "https://rpc.testnet.arc.network"
 ARC_TESTNET_EXPLORER = "https://testnet.arcscan.app"
 

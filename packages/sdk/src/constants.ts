@@ -1,6 +1,6 @@
 import type { Address, Chain } from 'viem';
 
-export const ARC_TESTNET_CHAIN_ID = 99999;
+export const ARC_TESTNET_CHAIN_ID = 5042002;
 
 export const arcTestnet = {
   id: ARC_TESTNET_CHAIN_ID,

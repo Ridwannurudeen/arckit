@@ -19,7 +19,7 @@ def test_usdc_decimals_is_six():
 
 def test_get_network_config_testnet():
     config = get_network_config("testnet")
-    assert config["chain_id"] == 99999
+    assert config["chain_id"] == 5042002
     assert config["rpc"].startswith("https://")
     assert "addresses" in config
 

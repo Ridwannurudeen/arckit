@@ -1,6 +1,6 @@
 {
   "name": "arckit-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript SDK for Arc agent commerce — ERC-8183, ERC-8004, USDC payments",
   "license": "MIT",
   "author": "Ridwan Nurudeen <ggudman@gmail.com>",
