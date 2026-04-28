@@ -21,26 +21,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm test
 
+      - name: Configure npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          npm whoami
+
       - name: Publish arckit-sdk
         if: startsWith(github.ref, 'refs/tags/sdk-v') || startsWith(github.ref, 'refs/tags/v')
         working-directory: packages/sdk
         run: pnpm publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish create-arc-app
         if: startsWith(github.ref, 'refs/tags/create-arc-app-v') || startsWith(github.ref, 'refs/tags/v')
         working-directory: packages/create-arc-app
         run: pnpm publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-pypi:
     name: Publish to PyPI
