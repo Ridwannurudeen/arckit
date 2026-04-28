@@ -1,4 +1,4 @@
-# @arckit/sdk
+# arckit-sdk
 
 TypeScript SDK for building agent commerce on [Arc](https://arc.network).
 
@@ -7,13 +7,13 @@ Wraps the canonical ERC-8183 (AgenticCommerce), ERC-8004 (Identity / Reputation 
 ## Install
 
 ```bash
-npm install @arckit/sdk viem
+npm install arckit-sdk viem
 ```
 
 ## Usage
 
 ```ts
-import { ArcKit } from '@arckit/sdk';
+import { ArcKit } from 'arckit-sdk';
 import { privateKeyToAccount } from 'viem/accounts';
 
 const arc = new ArcKit({

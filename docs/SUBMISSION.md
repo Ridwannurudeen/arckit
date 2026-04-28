@@ -26,8 +26,8 @@ The hook layer is even more underbuilt: Arc tutorials hardcode `hook: address(0)
 
 | Package | LOC | Tests |
 |---|---|---|
-| `@arckit/sdk` (TypeScript, viem) | ~600 LOC | 21 vitest |
-| `arckit` (Python, web3.py) | ~700 LOC | 25 pytest |
+| `arckit-sdk` (TypeScript, viem) | ~600 LOC | 21 vitest |
+| `arckit-sdk` (Python, web3.py) | ~700 LOC | 25 pytest |
 | `@arckit/hooks` (5 Solidity contracts + base) | ~600 LOC | 45 forge |
 | `create-arc-app` (CLI scaffold) | ~150 LOC | 5 vitest |
 | `examples/` (Python lifecycle, LangChain tool) | ~250 LOC | – |
@@ -54,7 +54,7 @@ Recognition or grant funding to:
 ### Verification
 
 - All code: https://github.com/Ridwannurudeen/arckit (public, MIT)
-- npm packs verified: `@arckit/sdk` (40KB), `create-arc-app` (4.7KB)
+- npm packs verified: `arckit-sdk` (40KB), `create-arc-app` (4.7KB)
 - PyPI build verified: `arckit-0.1.0-py3-none-any.whl` (16KB)
 - CI workflow: `.github/workflows/ci.yml` (TS + Python + Solidity matrix)
 - Release workflow: `.github/workflows/publish.yml` (tag-driven)
@@ -69,8 +69,8 @@ Recognition or grant funding to:
 >
 > ```bash
 > npx create-arc-app my-agent
-> npm install @arckit/sdk
-> pip install arckit
+> npm install arckit-sdk
+> pip install arckit-sdk
 > ```
 >
 > Both TypeScript and Python parity. MIT-licensed. 96 tests passing.

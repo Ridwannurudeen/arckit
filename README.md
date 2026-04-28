@@ -8,8 +8,8 @@ ArcKit fills the gap between Arc's [App Kit](https://docs.arc.network/app-kit) (
 
 | Package | Description |
 |---|---|
-| [`@arckit/sdk`](./packages/sdk) | TypeScript SDK — typed clients for ERC-8183 (AgenticCommerce), ERC-8004 (Identity / Reputation / Validation), and USDC payment flows |
-| [`arckit`](./packages/sdk-py) | Python SDK — same surface as the TS client, AI/agent-builder friendly |
+| [`arckit-sdk`](./packages/sdk) | TypeScript SDK — typed clients for ERC-8183 (AgenticCommerce), ERC-8004 (Identity / Reputation / Validation), and USDC payment flows |
+| [`arckit-sdk`](./packages/sdk-py) | Python SDK — same surface as the TS client, AI/agent-builder friendly |
 | [`@arckit/hooks`](./packages/hooks) | Five production-grade `IACPHook` Solidity templates: MultiEvaluator, Milestone, TimeDecayReputation, Escalation, MultiStablecoin |
 | [`create-arc-app`](./packages/create-arc-app) | `npx create-arc-app` — scaffold a working ERC-8183 client + provider + evaluator triad on Arc testnet in one command |
 
@@ -18,11 +18,11 @@ ArcKit fills the gap between Arc's [App Kit](https://docs.arc.network/app-kit) (
 ### TypeScript
 
 ```bash
-npm install @arckit/sdk viem
+npm install arckit-sdk viem
 ```
 
 ```ts
-import { ArcKit } from '@arckit/sdk';
+import { ArcKit } from 'arckit-sdk';
 import { privateKeyToAccount } from 'viem/accounts';
 
 const arc = new ArcKit({
@@ -42,7 +42,7 @@ const jobId = await arc.commerce.createJob({
 ### Python
 
 ```bash
-pip install arckit
+pip install arckit-sdk
 ```
 
 ```python

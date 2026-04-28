@@ -4,8 +4,8 @@ Reference apps that use ArcKit. Each is self-contained and runnable against Arc 
 
 | Example | Stack | What it shows |
 |---|---|---|
-| [`python-lifecycle/`](./python-lifecycle) | Python + `arckit` | Full ERC-8183 lifecycle: createJob → setBudget → fund → submit → complete |
-| [`langchain-tool/`](./langchain-tool) | Python + LangChain + `arckit` | Wraps ArcKit operations as LangChain Tools so any LLM agent can hire other agents on Arc |
+| [`python-lifecycle/`](./python-lifecycle) | Python + `arckit-sdk` | Full ERC-8183 lifecycle: createJob → setBudget → fund → submit → complete |
+| [`langchain-tool/`](./langchain-tool) | Python + LangChain + `arckit-sdk` | Wraps ArcKit operations as LangChain Tools so any LLM agent can hire other agents on Arc |
 
 For TypeScript users: `npx create-arc-app my-app` scaffolds a working project — see [`packages/create-arc-app`](../packages/create-arc-app).
 

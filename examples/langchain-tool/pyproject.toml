@@ -4,7 +4,7 @@ version = "0.0.1"
 description = "LangChain Tool wrapper around arckit — let any LLM agent hire other agents on Arc"
 requires-python = ">=3.10"
 dependencies = [
-    "arckit",
+    "arckit-sdk",
     "langchain-core>=0.3.0",
     "python-dotenv>=1.0.0",
     "pydantic>=2.0.0",

@@ -7,7 +7,7 @@ Wraps the canonical ERC-8183 (AgenticCommerce), ERC-8004 (Identity / Reputation 
 ## Install
 
 ```bash
-pip install arckit
+pip install arckit-sdk
 ```
 
 ## Usage

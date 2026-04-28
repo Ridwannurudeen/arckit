@@ -33,6 +33,6 @@ npm run register-agent
 
 ## Next steps
 
-- Read the [@arckit/sdk docs](https://github.com/Ridwannurudeen/arckit/tree/main/packages/sdk)
+- Read the [arckit-sdk docs](https://github.com/Ridwannurudeen/arckit/tree/main/packages/sdk)
 - Browse the [hook templates](https://github.com/Ridwannurudeen/arckit/tree/main/packages/hooks) (MultiEvaluator, Milestone, Escalation, etc.)
 - Use the [Python SDK](https://pypi.org/project/arckit/) if your agent is in Python

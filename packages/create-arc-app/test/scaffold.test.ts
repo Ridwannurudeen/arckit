@@ -23,7 +23,7 @@ describe('copyTemplate', () => {
     expect(existsSync(pkgPath)).toBe(true);
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
     expect(pkg.name).toBe('my-cool-agent');
-    expect(pkg.dependencies['@arckit/sdk']).toBeDefined();
+    expect(pkg.dependencies['arckit-sdk']).toBeDefined();
     expect(pkg.dependencies.viem).toBeDefined();
   });
 
@@ -36,7 +36,7 @@ describe('copyTemplate', () => {
   it('copies the lifecycle script with valid TypeScript', () => {
     copyTemplate(TEMPLATE_DIR, tmp, { projectName: 'app' });
     const lifecycle = readFileSync(path.join(tmp, 'src/lifecycle.ts'), 'utf8');
-    expect(lifecycle).toContain("import { ArcKit, JobStatus } from '@arckit/sdk'");
+    expect(lifecycle).toContain("import { ArcKit, JobStatus } from 'arckit-sdk'");
     expect(lifecycle).toContain('createJob');
     expect(lifecycle).toContain('setBudget');
     expect(lifecycle).toContain('fund');

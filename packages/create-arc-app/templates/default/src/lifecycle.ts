@@ -1,4 +1,4 @@
-import { ArcKit, JobStatus } from '@arckit/sdk';
+import { ArcKit, JobStatus } from 'arckit-sdk';
 import { privateKeyToAccount } from 'viem/accounts';
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;

@@ -20,7 +20,7 @@ Add to https://github.com/Ridwannurudeen/arckit/settings/secrets/actions:
 | Secret | Source |
 |---|---|
 | `NPM_TOKEN` | https://www.npmjs.com/settings/<user>/tokens — pick "Automation" type |
-| `PYPI_TOKEN` | https://pypi.org/manage/account/token/ — scope to the `arckit` project |
+| `PYPI_TOKEN` | https://pypi.org/manage/account/token/ — scope to the `arckit-sdk` project |
 
 ## Release flow
 
@@ -28,9 +28,9 @@ The `.github/workflows/publish.yml` workflow fires on tag push and routes by tag
 
 | Tag pattern | Publishes |
 |---|---|
-| `sdk-vX.Y.Z` | `@arckit/sdk` to npm |
+| `sdk-vX.Y.Z` | `arckit-sdk` to npm |
 | `create-arc-app-vX.Y.Z` | `create-arc-app` to npm |
-| `sdk-py-vX.Y.Z` | `arckit` to PyPI |
+| `sdk-py-vX.Y.Z` | `arckit-sdk` to PyPI |
 | `vX.Y.Z` | All three (coordinated release) |
 
 Example — coordinated v0.1.0 release:
@@ -50,7 +50,7 @@ CI runs build + tests before publishing. If anything fails, the publish is abort
 ## Manual fallback (only if CI is broken)
 
 ```bash
-# @arckit/sdk
+# arckit-sdk
 cd packages/sdk
 pnpm build && pnpm test
 pnpm publish --access public
@@ -68,7 +68,7 @@ twine upload dist/*
 
 ## After release
 
-- [ ] Verify install: `npm install @arckit/sdk` / `pip install arckit` / `npx create-arc-app demo`
+- [ ] Verify install: `npm install arckit-sdk` / `pip install arckit-sdk` / `npx create-arc-app demo`
 - [ ] Tweet from project account (template in `docs/SUBMISSION.md`)
 - [ ] Update Arc community forum thread with release notes
 - [ ] Submit to Arc Builders Fund if v0.1 is the first GA cut (see `docs/SUBMISSION.md`)
