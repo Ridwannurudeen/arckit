@@ -6,12 +6,12 @@ on:
       - 'v*'
       - 'sdk-v*'
       - 'sdk-py-v*'
-      - 'create-arc-app-v*'
+      - 'create-arckit-app-v*'
 
 jobs:
   publish-npm:
     name: Publish to npm
-    if: startsWith(github.ref, 'refs/tags/sdk-v') || startsWith(github.ref, 'refs/tags/create-arc-app-v') || startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/sdk-v') || startsWith(github.ref, 'refs/tags/create-arckit-app-v') || startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -52,9 +52,9 @@ jobs:
         working-directory: packages/sdk
         run: pnpm publish --access public --no-git-checks
 
-      - name: Publish create-arc-app
-        if: startsWith(github.ref, 'refs/tags/create-arc-app-v') || startsWith(github.ref, 'refs/tags/v')
-        working-directory: packages/create-arc-app
+      - name: Publish create-arckit-app
+        if: startsWith(github.ref, 'refs/tags/create-arckit-app-v') || startsWith(github.ref, 'refs/tags/v')
+        working-directory: packages/create-arckit-app
         run: pnpm publish --access public --no-git-checks
 
   publish-pypi:

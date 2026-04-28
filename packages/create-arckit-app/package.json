@@ -1,19 +1,19 @@
 {
-  "name": "create-arc-app",
+  "name": "create-arckit-app",
   "version": "0.1.0",
   "description": "Scaffold a working ERC-8183 agent commerce app on Arc in one command",
   "license": "MIT",
   "author": "Ridwan Nurudeen <ggudman@gmail.com>",
-  "homepage": "https://github.com/Ridwannurudeen/arckit/tree/main/packages/create-arc-app",
+  "homepage": "https://github.com/Ridwannurudeen/arckit/tree/main/packages/create-arckit-app",
   "repository": {
     "type": "git",
     "url": "https://github.com/Ridwannurudeen/arckit.git",
-    "directory": "packages/create-arc-app"
+    "directory": "packages/create-arckit-app"
   },
-  "keywords": ["arc", "arc-network", "erc-8183", "scaffold", "create-arc-app"],
+  "keywords": ["arc", "arc-network", "erc-8183", "scaffold", "create-arckit-app"],
   "type": "module",
   "bin": {
-    "create-arc-app": "./dist/index.js"
+    "create-arckit-app": "./dist/index.js"
   },
   "files": ["dist", "templates", "README.md", "LICENSE"],
   "scripts": {

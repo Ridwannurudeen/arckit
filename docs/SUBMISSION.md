@@ -29,7 +29,7 @@ The hook layer is even more underbuilt: Arc tutorials hardcode `hook: address(0)
 | `arckit-sdk` (TypeScript, viem) | ~600 LOC | 21 vitest |
 | `arckit-sdk` (Python, web3.py) | ~700 LOC | 25 pytest |
 | `@arckit/hooks` (5 Solidity contracts + base) | ~600 LOC | 45 forge |
-| `create-arc-app` (CLI scaffold) | ~150 LOC | 5 vitest |
+| `create-arckit-app` (CLI scaffold) | ~150 LOC | 5 vitest |
 | `examples/` (Python lifecycle, LangChain tool) | ~250 LOC | – |
 
 **96 tests passing.** All packages build cleanly. CI configured for npm + PyPI auto-publish on tagged releases.
@@ -54,7 +54,7 @@ Recognition or grant funding to:
 ### Verification
 
 - All code: https://github.com/Ridwannurudeen/arckit (public, MIT)
-- npm packs verified: `arckit-sdk` (40KB), `create-arc-app` (4.7KB)
+- npm packs verified: `arckit-sdk` (40KB), `create-arckit-app` (4.7KB)
 - PyPI build verified: `arckit-0.1.0-py3-none-any.whl` (16KB)
 - CI workflow: `.github/workflows/ci.yml` (TS + Python + Solidity matrix)
 - Release workflow: `.github/workflows/publish.yml` (tag-driven)
@@ -68,7 +68,7 @@ Recognition or grant funding to:
 > @arc/sdk doesn't exist yet. App Kit covers Bridge/Swap/Send. ArcKit covers the rest — typed clients for ERC-8183 jobs, ERC-8004 identity & reputation, USDC payments, plus 5 production-ready `IACPHook` templates (multi-evaluator, milestone, escalation, time-decay reputation, multi-stablecoin).
 >
 > ```bash
-> npx create-arc-app my-agent
+> npx create-arckit-app my-agent
 > npm install arckit-sdk
 > pip install arckit-sdk
 > ```

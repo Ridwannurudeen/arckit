@@ -1,11 +1,11 @@
-# create-arc-app
+# create-arckit-app
 
 Scaffold a working ERC-8183 agent commerce app on [Arc](https://arc.network) in one command.
 
 ## Usage
 
 ```bash
-npx create-arc-app my-agent-app
+npx create-arckit-app my-agent-app
 cd my-agent-app
 pnpm install
 pnpm dev

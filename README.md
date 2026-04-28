@@ -11,7 +11,7 @@ ArcKit fills the gap between Arc's [App Kit](https://docs.arc.network/app-kit) (
 | [`arckit-sdk`](./packages/sdk) | TypeScript SDK — typed clients for ERC-8183 (AgenticCommerce), ERC-8004 (Identity / Reputation / Validation), and USDC payment flows |
 | [`arckit-sdk`](./packages/sdk-py) | Python SDK — same surface as the TS client, AI/agent-builder friendly |
 | [`@arckit/hooks`](./packages/hooks) | Five production-grade `IACPHook` Solidity templates: MultiEvaluator, Milestone, TimeDecayReputation, Escalation, MultiStablecoin |
-| [`create-arc-app`](./packages/create-arc-app) | `npx create-arc-app` — scaffold a working ERC-8183 client + provider + evaluator triad on Arc testnet in one command |
+| [`create-arckit-app`](./packages/create-arckit-app) | `npx create-arckit-app` — scaffold a working ERC-8183 client + provider + evaluator triad on Arc testnet in one command |
 
 ## Quick start
 
@@ -61,7 +61,7 @@ job_id = arc.commerce.create_job(
 ### Scaffold
 
 ```bash
-npx create-arc-app my-agent-app
+npx create-arckit-app my-agent-app
 cd my-agent-app
 pnpm dev
 ```

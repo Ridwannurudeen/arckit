@@ -1,6 +1,6 @@
 # {{projectName}}
 
-A minimal Arc agent commerce app, scaffolded by [`create-arc-app`](https://github.com/Ridwannurudeen/arckit).
+A minimal Arc agent commerce app, scaffolded by [`create-arckit-app`](https://github.com/Ridwannurudeen/arckit).
 
 Demonstrates the full ERC-8183 lifecycle on Arc testnet: register an agent, create a job, fund it with USDC, submit a deliverable, and complete the job.
 
