@@ -28,9 +28,23 @@ jobs:
       - run: pnpm test
 
       - name: Configure npm auth
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          # Use npm config set rather than writing .npmrc directly — npm handles
+          # the format and avoids any quoting/encoding pitfalls.
+          npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm config set registry "https://registry.npmjs.org/"
+
+          # Verify token length is what we expect (real tokens are ~40+ chars).
+          # Print only the length, never the token itself.
+          echo "Token length: ${#NPM_TOKEN}"
+
+          # Confirm npm sees the auth.
+          echo "--- npm config list ---"
+          npm config list | grep -v "_authToken"
+
+          echo "--- npm whoami ---"
           npm whoami
 
       - name: Publish arckit-sdk
