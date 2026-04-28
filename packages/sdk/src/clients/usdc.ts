@@ -38,8 +38,8 @@ export class UsdcClient {
   }
 
   async approve(spender: Address, amount: number | bigint) {
-    const account = this.requireAccount('approve');
-    const hash = await this.opts.walletClient!.writeContract({
+    const { account, walletClient } = this.requireWallet('approve');
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.usdc,
@@ -51,8 +51,8 @@ export class UsdcClient {
   }
 
   async transfer(to: Address, amount: number | bigint) {
-    const account = this.requireAccount('transfer');
-    const hash = await this.opts.walletClient!.writeContract({
+    const { account, walletClient } = this.requireWallet('transfer');
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.usdc,
@@ -63,10 +63,10 @@ export class UsdcClient {
     return waitForReceipt(this.opts.publicClient, hash);
   }
 
-  private requireAccount(op: string): Account {
+  private requireWallet(op: string): { account: Account; walletClient: WalletClient } {
     if (!this.opts.account || !this.opts.walletClient) {
       throw new WalletRequiredError(op);
     }
-    return this.opts.account;
+    return { account: this.opts.account, walletClient: this.opts.walletClient };
   }
 }

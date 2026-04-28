@@ -9,7 +9,7 @@ import {
 import { agenticCommerceAbi } from '../abi/agenticCommerce.js';
 import { erc20Abi } from '../abi/erc20.js';
 import { JobNotFoundError, WalletRequiredError } from '../errors.js';
-import { type CreateJobParams, type Job, JobStatus } from '../types.js';
+import type { CreateJobParams, Job, JobStatus } from '../types.js';
 import { findEvent, hashString, toUsdcBase, waitForReceipt } from '../utils.js';
 
 export type CommerceClientOpts = {
@@ -66,11 +66,11 @@ export class CommerceClient {
   // ── Writes ──
 
   async createJob(params: CreateJobParams): Promise<bigint> {
-    const account = this.requireAccount('createJob');
+    const { account, walletClient } = this.requireWallet('createJob');
     const expiredAt = BigInt(params.expiredAt);
     const hook = params.hook ?? zeroAddress;
 
-    const hash = await this.opts.walletClient!.writeContract({
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.agenticCommerce,
@@ -85,9 +85,9 @@ export class CommerceClient {
   }
 
   async setBudget(jobId: bigint | number, amountUsdc: number | bigint, optParams: Hex = '0x') {
-    const account = this.requireAccount('setBudget');
+    const { account, walletClient } = this.requireWallet('setBudget');
     const amount = toUsdcBase(amountUsdc);
-    const hash = await this.opts.walletClient!.writeContract({
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.agenticCommerce,
@@ -99,11 +99,8 @@ export class CommerceClient {
   }
 
   /// Fund a job. Auto-approves USDC if allowance is insufficient (set autoApprove=false to skip).
-  async fund(
-    jobId: bigint | number,
-    opts: { optParams?: Hex; autoApprove?: boolean } = {},
-  ) {
-    const account = this.requireAccount('fund');
+  async fund(jobId: bigint | number, opts: { optParams?: Hex; autoApprove?: boolean } = {}) {
+    const { account, walletClient } = this.requireWallet('fund');
     const id = BigInt(jobId);
     const job = await this.getJob(id);
 
@@ -115,7 +112,7 @@ export class CommerceClient {
         args: [account.address, this.opts.agenticCommerce],
       });
       if (allowance < job.budget) {
-        const approveHash = await this.opts.walletClient!.writeContract({
+        const approveHash = await walletClient.writeContract({
           account,
           chain: null,
           address: this.opts.usdc,
@@ -127,7 +124,7 @@ export class CommerceClient {
       }
     }
 
-    const hash = await this.opts.walletClient!.writeContract({
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.agenticCommerce,
@@ -139,11 +136,12 @@ export class CommerceClient {
   }
 
   async submit(jobId: bigint | number, deliverable: Hex | string, optParams: Hex = '0x') {
-    const account = this.requireAccount('submit');
-    const deliverableHash = deliverable.startsWith('0x') && deliverable.length === 66
-      ? (deliverable as Hex)
-      : hashString(deliverable);
-    const hash = await this.opts.walletClient!.writeContract({
+    const { account, walletClient } = this.requireWallet('submit');
+    const deliverableHash =
+      deliverable.startsWith('0x') && deliverable.length === 66
+        ? (deliverable as Hex)
+        : hashString(deliverable);
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.agenticCommerce,
@@ -154,16 +152,11 @@ export class CommerceClient {
     return waitForReceipt(this.opts.publicClient, hash);
   }
 
-  async complete(
-    jobId: bigint | number,
-    reason: Hex | string = 'accepted',
-    optParams: Hex = '0x',
-  ) {
-    const account = this.requireAccount('complete');
-    const reasonHash = reason.startsWith('0x') && reason.length === 66
-      ? (reason as Hex)
-      : hashString(reason);
-    const hash = await this.opts.walletClient!.writeContract({
+  async complete(jobId: bigint | number, reason: Hex | string = 'accepted', optParams: Hex = '0x') {
+    const { account, walletClient } = this.requireWallet('complete');
+    const reasonHash =
+      reason.startsWith('0x') && reason.length === 66 ? (reason as Hex) : hashString(reason);
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.agenticCommerce,
@@ -174,16 +167,11 @@ export class CommerceClient {
     return waitForReceipt(this.opts.publicClient, hash);
   }
 
-  async reject(
-    jobId: bigint | number,
-    reason: Hex | string = 'rejected',
-    optParams: Hex = '0x',
-  ) {
-    const account = this.requireAccount('reject');
-    const reasonHash = reason.startsWith('0x') && reason.length === 66
-      ? (reason as Hex)
-      : hashString(reason);
-    const hash = await this.opts.walletClient!.writeContract({
+  async reject(jobId: bigint | number, reason: Hex | string = 'rejected', optParams: Hex = '0x') {
+    const { account, walletClient } = this.requireWallet('reject');
+    const reasonHash =
+      reason.startsWith('0x') && reason.length === 66 ? (reason as Hex) : hashString(reason);
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.agenticCommerce,
@@ -195,8 +183,8 @@ export class CommerceClient {
   }
 
   async claimRefund(jobId: bigint | number) {
-    const account = this.requireAccount('claimRefund');
-    const hash = await this.opts.walletClient!.writeContract({
+    const { account, walletClient } = this.requireWallet('claimRefund');
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.agenticCommerce,
@@ -207,10 +195,10 @@ export class CommerceClient {
     return waitForReceipt(this.opts.publicClient, hash);
   }
 
-  private requireAccount(op: string): Account {
+  private requireWallet(op: string): { account: Account; walletClient: WalletClient } {
     if (!this.opts.account || !this.opts.walletClient) {
       throw new WalletRequiredError(op);
     }
-    return this.opts.account;
+    return { account: this.opts.account, walletClient: this.opts.walletClient };
   }
 }

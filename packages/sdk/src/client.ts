@@ -1,4 +1,5 @@
 import {
+  http,
   type Account,
   type Address,
   type Chain,
@@ -7,7 +8,6 @@ import {
   type WalletClient,
   createPublicClient,
   createWalletClient,
-  http,
 } from 'viem';
 import { CommerceClient } from './clients/commerce.js';
 import { IdentityClient } from './clients/identity.js';

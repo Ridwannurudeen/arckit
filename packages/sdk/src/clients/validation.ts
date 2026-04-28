@@ -1,7 +1,7 @@
 import type { Account, Address, Hex, PublicClient, WalletClient } from 'viem';
 import { validationRegistryAbi } from '../abi/validationRegistry.js';
 import { WalletRequiredError } from '../errors.js';
-import { type ValidationStatus, ValidationResponse } from '../types.js';
+import type { ValidationResponse, ValidationStatus } from '../types.js';
 import { hashString, waitForReceipt } from '../utils.js';
 
 export type ValidationClientOpts = {
@@ -41,9 +41,9 @@ export class ValidationClient {
     requestURI: string;
     requestHash?: Hex;
   }) {
-    const account = this.requireAccount('validationRequest');
+    const { account, walletClient } = this.requireWallet('validationRequest');
     const requestHash = params.requestHash ?? hashString(params.requestURI);
-    const hash = await this.opts.walletClient!.writeContract({
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.validationRegistry,
@@ -61,10 +61,10 @@ export class ValidationClient {
     tag?: string;
     responseHash?: Hex;
   }) {
-    const account = this.requireAccount('validationResponse');
+    const { account, walletClient } = this.requireWallet('validationResponse');
     const responseHash = params.responseHash ?? hashString(params.responseURI);
     const tag = params.tag ?? '';
-    const hash = await this.opts.walletClient!.writeContract({
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.validationRegistry,
@@ -75,10 +75,10 @@ export class ValidationClient {
     return waitForReceipt(this.opts.publicClient, hash);
   }
 
-  private requireAccount(op: string): Account {
+  private requireWallet(op: string): { account: Account; walletClient: WalletClient } {
     if (!this.opts.account || !this.opts.walletClient) {
       throw new WalletRequiredError(op);
     }
-    return this.opts.account;
+    return { account: this.opts.account, walletClient: this.opts.walletClient };
   }
 }

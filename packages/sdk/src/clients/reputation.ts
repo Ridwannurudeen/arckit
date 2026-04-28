@@ -1,4 +1,11 @@
-import { type Account, type Address, type Hex, type PublicClient, type WalletClient, zeroHash } from 'viem';
+import {
+  type Account,
+  type Address,
+  type Hex,
+  type PublicClient,
+  type WalletClient,
+  zeroHash,
+} from 'viem';
 import { reputationRegistryAbi } from '../abi/reputationRegistry.js';
 import { WalletRequiredError } from '../errors.js';
 import { FeedbackCategory, type GiveFeedbackParams } from '../types.js';
@@ -17,15 +24,14 @@ export class ReputationClient {
   /// Submit feedback for an agent. Per ERC-8004, an agent owner cannot submit
   /// feedback for their own agent (the contract reverts).
   async giveFeedback(params: GiveFeedbackParams) {
-    const account = this.requireAccount('giveFeedback');
+    const { account, walletClient } = this.requireWallet('giveFeedback');
     const tag = params.tag ?? '';
     const metadataURI = params.metadataURI ?? '';
     const evidenceURI = params.evidenceURI ?? '';
     const comment = params.comment ?? '';
-    const feedbackHash =
-      params.feedbackHash ?? (comment ? hashString(comment) : (zeroHash as Hex));
+    const feedbackHash = params.feedbackHash ?? (comment ? hashString(comment) : (zeroHash as Hex));
 
-    const hash = await this.opts.walletClient!.writeContract({
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.reputationRegistry,
@@ -55,10 +61,10 @@ export class ReputationClient {
     return this.giveFeedback({ agentId, score, feedbackType: category });
   }
 
-  private requireAccount(op: string): Account {
+  private requireWallet(op: string): { account: Account; walletClient: WalletClient } {
     if (!this.opts.account || !this.opts.walletClient) {
       throw new WalletRequiredError(op);
     }
-    return this.opts.account;
+    return { account: this.opts.account, walletClient: this.opts.walletClient };
   }
 }

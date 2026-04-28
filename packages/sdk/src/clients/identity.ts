@@ -57,8 +57,8 @@ export class IdentityClient {
   // ── Writes ──
 
   async register(params: { metadataURI: string }): Promise<bigint> {
-    const account = this.requireAccount('register');
-    const hash = await this.opts.walletClient!.writeContract({
+    const { account, walletClient } = this.requireWallet('register');
+    const hash = await walletClient.writeContract({
       account,
       chain: null,
       address: this.opts.identityRegistry,
@@ -72,10 +72,10 @@ export class IdentityClient {
     return event.tokenId;
   }
 
-  private requireAccount(op: string): Account {
+  private requireWallet(op: string): { account: Account; walletClient: WalletClient } {
     if (!this.opts.account || !this.opts.walletClient) {
       throw new WalletRequiredError(op);
     }
-    return this.opts.account;
+    return { account: this.opts.account, walletClient: this.opts.walletClient };
   }
 }

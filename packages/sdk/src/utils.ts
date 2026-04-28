@@ -19,11 +19,7 @@ export function hashString(s: string): `0x${string}` {
 }
 
 /// Wait for a transaction receipt and throw a typed error on revert/timeout.
-export async function waitForReceipt(
-  publicClient: PublicClient,
-  hash: Hash,
-  timeoutMs = 120_000,
-) {
+export async function waitForReceipt(publicClient: PublicClient, hash: Hash, timeoutMs = 120_000) {
   try {
     const receipt = await publicClient.waitForTransactionReceipt({ hash, timeout: timeoutMs });
     if (receipt.status !== 'success') {

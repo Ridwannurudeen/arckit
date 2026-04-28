@@ -16,7 +16,7 @@ console.log(`USDC balance: ${usdcBalance}`);
 
 if (usdcBalance < 0.01) {
   throw new Error(
-    `Address has < 0.01 USDC. Fund it from the Arc faucet at https://testnet.arcscan.app first.`,
+    'Address has < 0.01 USDC. Fund it from the Arc faucet at https://testnet.arcscan.app first.',
   );
 }
 
@@ -45,4 +45,4 @@ await arc.commerce.complete(jobId, 'looks good');
 
 const final = await arc.commerce.getJob(jobId);
 console.log(`\nFinal status: ${JobStatus[final.status]} (${final.status})`);
-console.log(`Explorer: https://testnet.arcscan.app/tx`);
+console.log('Explorer: https://testnet.arcscan.app/tx');
